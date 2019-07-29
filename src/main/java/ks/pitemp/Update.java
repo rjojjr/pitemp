@@ -12,10 +12,10 @@ public class Update {
     private SingleClient client = new SingleClient("192.168.1.25", "", 4444, "pizero1", "Password44#");
 
     public void update(String temp, String humidity) throws Exception{
-        Update(temp, humidity);
+        updateDB(temp, humidity);
     }
 
-    private void Update(String temp, String humidity) throws Exception{
+    private void updateDB(String temp, String humidity) throws Exception{
         this.humidity = humidity;
         this.temp = temp;
         client.logon();
