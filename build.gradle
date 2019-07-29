@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'PITemp'
-version '1.0.00a'
+version '1.0.01a'
 
 sourceCompatibility = 1.8
 

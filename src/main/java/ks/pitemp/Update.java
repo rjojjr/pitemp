@@ -8,11 +8,14 @@ import java.util.Map;
 
 public class Update {
 
-    public String temp = "", humidity = "";
+    private String temp = "", humidity = "";
     private SingleClient client = new SingleClient("192.168.1.25", "", 4444, "pizero1", "Password44#");
 
-
     public void update(String temp, String humidity) throws Exception{
+        Update(temp, humidity);
+    }
+
+    private void Update(String temp, String humidity) throws Exception{
         this.humidity = humidity;
         this.temp = temp;
         client.logon();
