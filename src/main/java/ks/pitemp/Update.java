@@ -20,11 +20,15 @@ public class Update {
         this.temp = temp;
         client.logon();
         Transaction transaction = new Transaction();
+        transaction.setRequestTime(System.currentTimeMillis());
         transaction.setUsername("pizero1");
         Map<String, String> row = new HashMap<>();
         row.put("user", "pizero1");
         row.put("temp", temp);
         row.put("humidity", humidity);
+        row.put("date", CalenderConverter.getMonthDayYearHourMinuteSecond(System.currentTimeMillis(), ":", "~"));
+        transaction.setPut(row);
+        client.sendCommand(transaction);
     }
 
     public String getHumidity() {
