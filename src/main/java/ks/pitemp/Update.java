@@ -21,7 +21,7 @@ public class Update {
         updateDB(temp, humidity, date);
     }
 
-    public boolean logon() throws Exception{
+    boolean logon() throws Exception{
         return client.logon();
     }
 
@@ -55,11 +55,11 @@ public class Update {
 
     }
 
-    public String getHumidity() {
+    String getHumidity() {
         return humidity;
     }
 
-    public String getTemp() {
+    String getTemp() {
         return temp;
     }
 }
