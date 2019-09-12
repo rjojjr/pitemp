@@ -1,7 +1,6 @@
 package ks.pitemp;
 
 import py4j.GatewayServer;
-import sun.rmi.transport.Connection;
 
 public class Main {
 
@@ -15,7 +14,12 @@ public class Main {
 
         // app is now the gateway.entry_point
         System.out.println("Starting gateway server");
-        GatewayServer server = new GatewayServer(new Main());
+        //GatewayServer server = new GatewayServer(new Main());
+        /*2
+        GatewayServer server = new GatewayServer(new Main(), 25331);
+         2*/
+        GatewayServer server = new GatewayServer(new Main(), 25333);
+
         server.start();
     }
 

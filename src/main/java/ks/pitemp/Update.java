@@ -13,10 +13,25 @@ import java.util.Map;
 public class Update {
 
     private String temp = "", humidity = "";
-    private SingleClient client = new SingleClient("192.168.1.25", " ", 4444, "pizero2", "Password44#");
+    private SingleClient client;
+
+    public Update(){
+        //1
+        client = new SingleClient("192.168.1.25", " ", 4444, "pizero1", "Password44#");
+        //1
+        //2
+        //client = new SingleClient("192.168.1.25", " ", 4444, "pizero2", "Password55#");
+        //2
+        //3
+        //client = new SingleClient("192.168.1.25", " ", 4444, "pizero3", "Password55#");
+        //3
+        //4
+        //client = new SingleClient("192.168.1.25", " ", 4444, "pizero41", "Password55#");
+        //4
+    }
 
     public void update(String temp, String humidity) throws Exception{
-        String date = CalenderConverter.getMonthDayYearHourMinuteSecond(System.currentTimeMillis(), "~", "~");
+        String date = CalenderConverter.getMonthDayYearHourMinuteSecond(System.currentTimeMillis(), "-", "-");
         System.out.println("Update Received: Temp: " + temp + " Humidity: " + humidity + " Date: " + date);
         updateDB(temp, humidity, date);
     }
@@ -34,7 +49,7 @@ public class Update {
         }else{
             Transaction transaction = new Transaction();
             transaction.setRequestTime(System.currentTimeMillis());
-            //transaction.setUsername("pizero1");
+            transaction.setUsername("pizero1");
             List<Map<String, String>> rows = new ArrayList<>();
             Map<String, String> row = new HashMap<>();
             row.put("temp", temp);
@@ -42,7 +57,13 @@ public class Update {
             row.put("date", date);
             rows.add(row);
             transaction.setNewRows(rows);
-            transaction.setOperation("CREATE ROWS ADVANCED PiTempsServerRoom");
+            /*1
+            transaction.setOperation("CREATE ROWS ADVANCED PiTempsOffice");
+             1*/
+            transaction.setOperation("CREATE ROWS ADVANCED PiTempsOffice");
+            //transaction.setOperation("CREATE ROWS ADVANCED PiTempsServerRoom");
+            //transaction.setOperation("CREATE ROWS ADVANCED PiTempsLR");
+            //transaction.setOperation("CREATE ROWS ADVANCED PiTempsBedroom");
             System.out.println("Sending update...");
             DatabaseResults results = client.sendCommand(transaction);
             if(results.isSuccess()){
