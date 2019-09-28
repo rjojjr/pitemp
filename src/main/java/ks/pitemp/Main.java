@@ -4,6 +4,8 @@ import py4j.GatewayServer;
 
 public class Main {
 
+    public static final int PI = 3;
+
     private Update app;
 
     public Main(){
@@ -14,12 +16,29 @@ public class Main {
 
         // app is now the gateway.entry_point
         System.out.println("Starting gateway server");
-        //GatewayServer server = new GatewayServer(new Main());
-        /*2
-        GatewayServer server = new GatewayServer(new Main(), 25331);
-         2*/
-        GatewayServer server = new GatewayServer(new Main(), 25333);
+        GatewayServer server = null;
 
+        switch (PI){
+            case 1:
+                server = new GatewayServer(new Main());
+                break;
+            case 2:
+                server = new GatewayServer(new Main(), 25331);
+                break;
+            case 3:
+                server = new GatewayServer(new Main(), 25332);
+                break;
+            case 4:
+                server = new GatewayServer(new Main(), 25333);
+                break;
+        }
+        //GatewayServer server = new GatewayServer(new Main());
+
+        //GatewayServer server = new GatewayServer(new Main(), 25331);
+
+        //GatewayServer server = new GatewayServer(new Main(), 25332);
+
+        //GatewayServer server = new GatewayServer(new Main(), 25333);
         server.start();
     }
 
