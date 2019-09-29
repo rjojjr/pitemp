@@ -4,7 +4,6 @@ import kirchnersolutions.javabyte.driver.common.driver.DatabaseResults;
 import kirchnersolutions.javabyte.driver.common.driver.Transaction;
 import kirchnersolutions.javabyte.driver.singleclient.SingleClient;
 
-import javax.swing.text.SimpleAttributeSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,18 +16,6 @@ public class Update {
     private String username = "", table = "";
 
     public Update(){
-        //1
-        //client = new SingleClient("192.168.1.25", " ", 4444, "pizero1", "Password44#");
-        //1
-        //2
-        //client = new SingleClient("192.168.1.25", " ", 4444, "pizero2", "Password55#");
-        //2
-        //3
-        //client = new SingleClient("192.168.1.25", " ", 4444, "pizero3", "Password55#");
-        //3
-        //4
-        //client = new SingleClient("192.168.1.25", " ", 4444, "pizero41", "Password55#");
-        //4
         switch (Main.PI){
             case 1:
                 client = new SingleClient("192.168.1.25", " ", 4444, "pizero1", "Password44#");
@@ -80,10 +67,6 @@ public class Update {
             rows.add(row);
             transaction.setNewRows(rows);
             transaction.setOperation("CREATE ROWS ADVANCED " + table);
-            //transaction.setOperation("CREATE ROWS ADVANCED PiTempsOffice");
-            //transaction.setOperation("CREATE ROWS ADVANCED PiTempsServerRoom");
-            //transaction.setOperation("CREATE ROWS ADVANCED PiTempsLR");
-            //transaction.setOperation("CREATE ROWS ADVANCED PiTempsBedroom");
             System.out.println("Sending update...");
             DatabaseResults results = client.sendCommand(transaction);
             if(results.isSuccess()){

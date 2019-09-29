@@ -13,11 +13,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws  Exception{
-
-        // app is now the gateway.entry_point
-        System.out.println("Starting gateway server");
+        System.out.println("Starting gateway server...");
         GatewayServer server = null;
-
         switch (PI){
             case 1:
                 server = new GatewayServer(new Main());
@@ -32,14 +29,8 @@ public class Main {
                 server = new GatewayServer(new Main(), 25333);
                 break;
         }
-        //GatewayServer server = new GatewayServer(new Main());
-
-        //GatewayServer server = new GatewayServer(new Main(), 25331);
-
-        //GatewayServer server = new GatewayServer(new Main(), 25332);
-
-        //GatewayServer server = new GatewayServer(new Main(), 25333);
         server.start();
+        System.out.println("Gateway server started");
     }
 
     public Update getApp() throws Exception{
