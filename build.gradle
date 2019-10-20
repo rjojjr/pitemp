@@ -34,7 +34,7 @@ if (!hasProperty('mainClass')) {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile name: 'py4j'
-    compile name: 'JavaByteDriver-1.0.07a'
+    compile name: 'PiCenterConnector-1.0.00a'
 }
 
 jar {

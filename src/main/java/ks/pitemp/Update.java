@@ -1,8 +1,10 @@
 package ks.pitemp;
 
-import kirchnersolutions.javabyte.driver.common.driver.DatabaseResults;
-import kirchnersolutions.javabyte.driver.common.driver.Transaction;
-import kirchnersolutions.javabyte.driver.singleclient.SingleClient;
+
+
+import picenter.connector.driver.DatabaseResults;
+import picenter.connector.driver.Transaction;
+import picenter.connector.singleclient.SingleClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +49,8 @@ public class Update {
     }
 
     boolean logon() throws Exception{
-        return client.logon();
+        return true;
+        //return client.logon();
     }
 
     private void updateDB(String temp, String humidity, String date) throws Exception{
@@ -63,12 +66,13 @@ public class Update {
             Map<String, String> row = new HashMap<>();
             row.put("temp", temp);
             row.put("humidity", humidity);
-            row.put("date", date);
+            row.put("time", date);
             rows.add(row);
             transaction.setNewRows(rows);
-            transaction.setOperation("CREATE ROWS ADVANCED " + table);
+            transaction.setOperation(table);
             System.out.println("Sending update...");
-            DatabaseResults results = client.sendCommand(transaction);
+            DatabaseResults results;
+            results = client.sendCommand(transaction);
             if(results.isSuccess()){
                 System.out.println("Update Successful");
             }else {
