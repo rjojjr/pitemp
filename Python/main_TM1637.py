@@ -10,7 +10,32 @@ tm = tm1637.TM1637(clk=23, dio=24)
 import time
 from py4j.java_gateway import JavaGateway, GatewayParameters
 
-gateway = JavaGateway()
+pi = 1
+
+def one():
+    return JavaGateway()
+
+def two():
+    return JavaGateway(gateway_parameters=GatewayParameters(port=25331))
+
+def three():
+    return JavaGateway(gateway_parameters=GatewayParameters(port=25332))
+
+def four():
+    return JavaGateway(gateway_parameters=GatewayParameters(port=25333))
+
+switcher{
+    1: one,
+    2: two,
+    3: three,
+    4: four
+}
+
+def gateway_switch(pi):
+    func = switcher(pi, JavaGateway())
+    return func()
+
+gateway = gateway_switch(pi)
 #gateway = JavaGateway(gateway_parameters=GatewayParameters(port=25333))
 app = gateway.entry_point.getApp()
 temp = 0
