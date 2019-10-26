@@ -18,26 +18,23 @@ public class Update {
     private String username = "", table = "";
 
     public Update(){
+        client = new SingleClient(Main.IP, Main.HOSTNAME, 4444);
         switch (Main.PI){
             case 1:
-                client = new SingleClient("192.168.1.25", " ", 4444, "pizero1", "Password44#");
                 username = "pizero1";
-                table = "PiTempsOffice";
+                table = "office";
                 break;
             case 2:
-                client = new SingleClient("192.168.1.25", " ", 4444, "pizero2", "Password55#");
                 username = "pizero2";
-                table = "PiTempsServerRoom";
+                table = "serverroom";
                 break;
             case 3:
-                client = new SingleClient("192.168.1.25", " ", 4444, "pizero3", "Password55#");
                 username = "pizero3";
-                table = "PiTempsLR";
+                table = "livingroom";
                 break;
             case 4:
-                client = new SingleClient("192.168.1.25", " ", 4444, "pizero41", "Password55#");
-                username = "pizero41";
-                table = "PiTempsBedroom";
+                username = "pizero4";
+                table = "bedroom";
                 break;
         }
     }

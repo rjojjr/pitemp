@@ -1,5 +1,5 @@
 # pitemp
-A py4j gateway application to send DHT11/DHT22 readings to JavaByte
+A py4j gateway application to send DHT11/DHT22 readings to PiCenter
 
 PiTemp is now in beta release status.
 
@@ -9,18 +9,18 @@ the switch statement to build variants for different Raspberry Pis.
 The main class creates a py4j gateway server that passes an Update
 object to the PiTemp main.py python service.
 
-The Update constructor constructs a new single client JavaByte
+The Update constructor constructs a new single client PiCenter
 socket connection:
 
-SingleClient(JavaByte IP, JavaByte Hostname(Optional), JavaByte Port, Username, Password);
+SingleClient(PiCenter IP, PiCenter Hostname(Optional), PiCenter Port);
 
 PiTemp includes mainTM1637, to replace main.py and add TM1637
 functionality. 
 
 Requirements:
 JVM 8
-JavaByte Database
-Raspberry Pi with network access to JavaByte
+PiCenter Springboot web application
+Raspberry Pi with network access PiCenter server
 WiringPI python library(To use TM1637)
 Adafruit DHT python library
 py4j Python Java Gateway library

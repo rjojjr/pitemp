@@ -1,5 +1,10 @@
 PiTemp Gateway Changelog
 
+10/20/2019
+1.0.01b
+Build 100101
+    Started PiCenter conversion
+
 09/29/2019
 1.0.00b
 Build 100100
