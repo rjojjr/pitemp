@@ -5,6 +5,7 @@ import time
 from py4j.java_gateway import JavaGateway, GatewayParameters
 
 pi = 1
+debug = 1
 
 def one():
     return JavaGateway()
@@ -44,7 +45,8 @@ def getTemp(t, h):
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     temp = int((1.8 * temperature) + 32)
     humidity = int(humidity)
-    print "Temp: " + str(temp) + " Humidity: " + str(humidity)
+    if(debug == 1):
+        print "Temp: " + str(temp) + " Humidity: " + str(humidity)
     t.append(temp)
     h.append(humidity)
 
@@ -54,7 +56,8 @@ def getTempE():
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     temp = int((1.8 * temperature) + 32)
     humidity = int(humidity)
-    print "Temp: " + str(temp) + " Humidity: " + str(humidity)
+    if(debug == 1):
+        print "Temp: " + str(temp) + " Humidity: " + str(humidity)
 
 def getAvg(tr, hr):
     t = 0

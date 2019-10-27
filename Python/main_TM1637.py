@@ -11,6 +11,7 @@ import time
 from py4j.java_gateway import JavaGateway, GatewayParameters
 
 pi = 1
+debug = 1;
 
 def one():
     return JavaGateway()
@@ -52,7 +53,9 @@ def getTemp(t, h):
     t1 = str(int(temp))
     h1 = str(int(humidity))
     tm.numbers(int(t1[0] + t1[1]), int(h1[0] + h1[1]))
-    print "Temp: " + str(temp) + " Humidity: " + str(humidity)
+    if(debug == 1):
+        print "Temp: " + str(temp) + " Humidity: " + str(humidity)
+
     t.append(temp)
     h.append(humidity)
 
@@ -66,7 +69,8 @@ def getTempE():
     t = str(int(temp))
     h = str(int(humidity))
     tm.numbers(int(t[0] + t[1]), int(h[0] + h[1]))
-    print "Temp: " + str(temp) + " Humidity: " + str(humidity)
+    if(debug == 1):
+        print "Temp: " + str(temp) + " Humidity: " + str(humidity)
 
 
 def getAvg(tr, hr):

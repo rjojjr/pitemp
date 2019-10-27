@@ -40,9 +40,10 @@ public class Update {
     }
 
     public void update(String temp, String humidity) throws Exception{
-        String date = CalenderConverter.getMonthDayYearHourMinuteSecond(System.currentTimeMillis(), "-", "-");
+        Long time = System.currentTimeMillis();
+        String date = CalenderConverter.getMonthDayYearHourMinuteSecond(time, "-", "-");
         System.out.println("Update Received: Temp: " + temp + " Humidity: " + humidity + " Date: " + date);
-        updateDB(temp, humidity, date);
+        updateDB(temp, humidity, time + "");
     }
 
     boolean logon() throws Exception{
