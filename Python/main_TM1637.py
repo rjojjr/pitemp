@@ -10,8 +10,13 @@ tm = tm1637.TM1637(clk=23, dio=24)
 import time
 from py4j.java_gateway import JavaGateway, GatewayParameters
 
-pi = 1
-debug = 1;
+PI = 1
+#DHT Pin
+DHT_PIN = 4
+#Print each reading
+DEBUG = 1
+#Send every reading to application
+DEBUG_SOCKET = 1
 
 def one():
     return JavaGateway()
@@ -36,24 +41,22 @@ def gateway_switch(pinum):
     func = switcher.get(pinum, JavaGateway())
     return func()
 
-gateway = gateway_switch(pi)
+gateway = gateway_switch(PI)
 #gateway = JavaGateway(gateway_parameters=GatewayParameters(port=25333))
 app = gateway.entry_point.getApp()
 temp = 0
 humidity = 0
 temperature = 0
 
-
 def getTemp(t, h):
     sensor = Adafruit_DHT.DHT11
-    pin = 4
-    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+    humidity, temperature = Adafruit_DHT.read_retry(sensor, DHT_PIN)
     temp = int((1.8 * temperature) + 32)
     humidity = int(humidity)
     t1 = str(int(temp))
     h1 = str(int(humidity))
     tm.numbers(int(t1[0] + t1[1]), int(h1[0] + h1[1]))
-    if(debug == 1):
+    if(DEBUG == 1):
         print "Temp: " + str(temp) + " Humidity: " + str(humidity)
 
     t.append(temp)
@@ -68,8 +71,10 @@ def getTempE():
     humidity = int(humidity)
     t = str(int(temp))
     h = str(int(humidity))
+    if(DEBUG_SOCKET == 1):
+        app.update(str(temp), str(humidity))
     tm.numbers(int(t[0] + t[1]), int(h[0] + h[1]))
-    if(debug == 1):
+    if(DEBUG == 1):
         print "Temp: " + str(temp) + " Humidity: " + str(humidity)
 
 

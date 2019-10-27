@@ -8,6 +8,7 @@ public class Main {
     public static final String IP = "192.168.1.110";
     public static final String HOSTNAME = " ";
     public static final int PORT = 7773;
+    public static final boolean DEBUG = true;
 
     private Update app;
 
