@@ -5,8 +5,9 @@ import py4j.GatewayServer;
 public class Main {
 
     public static final int PI = 1;
-    public static final String IP = "192.168.1.191";
+    public static final String IP = "192.168.1.110";
     public static final String HOSTNAME = " ";
+    public static final int PORT = 7773;
 
     private Update app;
 

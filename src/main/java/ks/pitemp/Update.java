@@ -18,7 +18,7 @@ public class Update {
     private String username = "", table = "";
 
     public Update(){
-        client = new SingleClient(Main.IP, Main.HOSTNAME, 4444);
+        client = new SingleClient(Main.IP, Main.HOSTNAME, Main.PORT);
         switch (Main.PI){
             case 1:
                 username = "pizero1";
@@ -46,8 +46,8 @@ public class Update {
     }
 
     boolean logon() throws Exception{
-        return true;
-        //return client.logon();
+        //return true;
+        return client.logon();
     }
 
     private void updateDB(String temp, String humidity, String date) throws Exception{
