@@ -3,20 +3,22 @@
 import RPi.GPIO as GPIO
 import tm1637
 import Adafruit_DHT
-
-tm = tm1637.TM1637(clk=23, dio=24)
+#PI 1
+#tm = tm1637.TM1637(clk=23, dio=24)
+#PI 4
+tm = tm1637.TM1637(clk=24, dio=23)
 
 # v1.0.00a
 import time
 from py4j.java_gateway import JavaGateway, GatewayParameters
 
-PI = 1
+PI = 4
 #DHT Pin
 DHT_PIN = 4
 #Print each reading
-DEBUG = 1
+DEBUG = 0
 #Send every reading to application
-DEBUG_SOCKET = 1
+DEBUG_SOCKET = 0
 
 def one():
     return JavaGateway()
@@ -49,7 +51,7 @@ humidity = 0
 temperature = 0
 
 def getTemp(t, h):
-    sensor = Adafruit_DHT.DHT11
+    sensor = Adafruit_DHT.DHT22
     humidity, temperature = Adafruit_DHT.read_retry(sensor, DHT_PIN)
     temp = int((1.8 * temperature) + 32)
     humidity = int(humidity)

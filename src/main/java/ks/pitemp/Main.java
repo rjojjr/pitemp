@@ -4,11 +4,11 @@ import py4j.GatewayServer;
 
 public class Main {
 
-    public static final int PI = 1;
-    public static final String IP = "192.168.1.110";
+    public static final int PI = 4;
+    public static final String IP = "192.168.1.25";
     public static final String HOSTNAME = " ";
     public static final int PORT = 7773;
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     private Update app;
 
@@ -44,12 +44,14 @@ public class Main {
             if(app.logon()){
                 System.out.println("Logged on");
             }else{
-                System.out.println("Failed to logon..." + System.lineSeparator() + "Retrying in 60 seconds...");
-                Thread.sleep(60 * 1000);
-                if(app.logon()){
-                    System.out.println("Logged on");
-                }else{
-                    System.out.println("Failed to connect");
+                while(app.logon() != true){
+                    System.out.println("Failed to logon..." + System.lineSeparator() + "Retrying in 60 seconds...");
+                    Thread.sleep(60 * 1000);
+                    if(app.logon()){
+                        System.out.println("Logged on");
+                    }else{
+                        System.out.println("Failed to connect");
+                    }
                 }
             }
         }catch (Exception e){
