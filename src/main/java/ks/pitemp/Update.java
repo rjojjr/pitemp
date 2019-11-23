@@ -36,6 +36,14 @@ public class Update {
                 username = "pizero4";
                 table = "bedroom";
                 break;
+            case 5:
+                username = "pizero5";
+                table = "serverroom";
+                break;
+            case 6:
+                username = "pizero6";
+                table = "outside";
+                break;
         }
     }
 

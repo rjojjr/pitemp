@@ -4,9 +4,9 @@ import Adafruit_DHT
 import time
 from py4j.java_gateway import JavaGateway, GatewayParameters
 
-PI = 3
+PI = 5
 #PI 2 PIN 17
-#PI1,3-4 PIN 4
+#PI1,3-5 PIN 4
 DHT_PIN = 4
 #Print each reading
 DEBUG = 0
@@ -25,6 +25,9 @@ def three():
 def four():
     return JavaGateway(gateway_parameters=GatewayParameters(port=25333))
 
+def six():
+    return JavaGateway(gateway_parameters=GatewayParameters(port=25334))
+
 def oneDHT():
     return JavaGateway()
 
@@ -41,7 +44,9 @@ switcher = {
     1: one,
     2: two,
     3: three,
-    4: four
+    4: four,
+    5: two,
+    6: six
 }
 
 def gateway_switch(pinum):
@@ -56,7 +61,7 @@ temperature = 0
 
 def getTemp(t, h):
     #pi 3,4 DHT22
-    sensor = Adafruit_DHT.DHT22
+    sensor = Adafruit_DHT.DHT11
     humidity, temperature = Adafruit_DHT.read_retry(sensor, DHT_PIN)
     temp = int((1.8 * temperature) + 32)
     humidity = int(humidity)

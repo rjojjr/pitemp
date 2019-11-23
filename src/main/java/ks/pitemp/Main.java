@@ -32,6 +32,12 @@ public class Main {
             case 4:
                 server = new GatewayServer(new Main(), 25333);
                 break;
+            case 5:
+                server = new GatewayServer(new Main(), 25331);
+                break;
+            case 6:
+                server = new GatewayServer(new Main(), 25334);
+                break;
         }
         server.start();
         System.out.println("Gateway server started");
