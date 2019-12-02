@@ -1,8 +1,10 @@
 package ks.pitemp;
 
-import kirchnersolutions.javabyte.driver.common.driver.DatabaseResults;
-import kirchnersolutions.javabyte.driver.common.driver.Transaction;
-import kirchnersolutions.javabyte.driver.singleclient.SingleClient;
+
+
+import picenter.connector.driver.DatabaseResults;
+import picenter.connector.driver.Transaction;
+import picenter.connector.singleclient.SingleClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,34 +18,42 @@ public class Update {
     private String username = "", table = "";
 
     public Update(){
+        client = new SingleClient(Main.IP, Main.HOSTNAME, Main.PORT);
         switch (Main.PI){
             case 1:
-                client = new SingleClient("192.168.1.25", " ", 4444, "pizero1", "Password44#");
                 username = "pizero1";
-                table = "PiTempsOffice";
+                table = "office";
                 break;
             case 2:
-                client = new SingleClient("192.168.1.25", " ", 4444, "pizero2", "Password55#");
                 username = "pizero2";
-                table = "PiTempsServerRoom";
+                table = "serverroom";
                 break;
             case 3:
-                client = new SingleClient("192.168.1.25", " ", 4444, "pizero3", "Password55#");
                 username = "pizero3";
-                table = "PiTempsLR";
+                table = "livingroom";
                 break;
             case 4:
-                client = new SingleClient("192.168.1.25", " ", 4444, "pizero41", "Password55#");
-                username = "pizero41";
-                table = "PiTempsBedroom";
+                username = "pizero4";
+                table = "bedroom";
+                break;
+            case 5:
+                username = "pizero5";
+                table = "serverroom";
+                break;
+            case 6:
+                username = "pizero6";
+                table = "outside";
                 break;
         }
     }
 
     public void update(String temp, String humidity) throws Exception{
-        String date = CalenderConverter.getMonthDayYearHourMinuteSecond(System.currentTimeMillis(), "-", "-");
-        System.out.println("Update Received: Temp: " + temp + " Humidity: " + humidity + " Date: " + date);
-        updateDB(temp, humidity, date);
+        Long time = System.currentTimeMillis();
+        if(Main.DEBUG){
+            String date = CalenderConverter.getMonthDayYearHourMinuteSecond(time, "-", "-");
+            System.out.println("Update Received: Temp: " + temp + " Humidity: " + humidity + " Date: " + date);
+        }
+        updateDB(temp, humidity, time + "");
     }
 
     boolean logon() throws Exception{
@@ -63,12 +73,13 @@ public class Update {
             Map<String, String> row = new HashMap<>();
             row.put("temp", temp);
             row.put("humidity", humidity);
-            row.put("date", date);
+            row.put("time", date);
             rows.add(row);
             transaction.setNewRows(rows);
-            transaction.setOperation("CREATE ROWS ADVANCED " + table);
+            transaction.setOperation(table);
             System.out.println("Sending update...");
-            DatabaseResults results = client.sendCommand(transaction);
+            DatabaseResults results;
+            results = client.sendCommand(transaction);
             if(results.isSuccess()){
                 System.out.println("Update Successful");
             }else {

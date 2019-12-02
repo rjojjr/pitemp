@@ -1,6 +1,29 @@
 PiTemp Gateway Changelog
 
-09/29/2019
+2.0.03b
+Build 110104
+    Added monitor thread.
+
+1.0.03b
+11/12/2019
+Build 100104
+    Fix bug for TM1637 to show single digit readings.
+
+1.0.02b
+10/29/2019
+Build 100103
+    Attempts to logon every 60 seconds until stopped.
+
+10/26/2019
+Build 100102
+    PiCenter integration test
+
+1.0.01b
+10/20/2019
+Build 100101
+    Initial PiCenter conversion
+
 1.0.00b
+09/29/2019
 Build 100100
     Initial beta release.
