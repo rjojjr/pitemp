@@ -3,9 +3,8 @@ plugins {
 }
 
 group 'PITemp'
-version '1.0.03b'
-def build = '100104'
-
+version '2.0.03b'
+def build = '110104'
 sourceCompatibility = 1.8
 
 repositories {

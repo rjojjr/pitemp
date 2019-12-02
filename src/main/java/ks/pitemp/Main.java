@@ -2,9 +2,12 @@ package ks.pitemp;
 
 import py4j.GatewayServer;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class Main {
 
-    public static final int PI = 4;
+    public static final int PI = 6;
     public static final String IP = "192.168.1.25";
     public static final String HOSTNAME = " ";
     public static final int PORT = 7773;
@@ -17,6 +20,12 @@ public class Main {
     }
 
     public static void main(String[] args) throws  Exception{
+        Thread monitorThread = new MonitorThread();
+        monitorThread.start();
+        startServer();
+    }
+
+    private static void startServer() {
         System.out.println("Starting gateway server...");
         GatewayServer server = null;
         switch (PI){

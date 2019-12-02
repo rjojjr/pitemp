@@ -1,5 +1,9 @@
 PiTemp Gateway Changelog
 
+2.0.03b
+Build 110104
+    Added monitor thread.
+
 1.0.03b
 11/12/2019
 Build 100104

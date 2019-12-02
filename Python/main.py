@@ -4,7 +4,7 @@ import Adafruit_DHT
 import time
 from py4j.java_gateway import JavaGateway, GatewayParameters
 
-PI = 5
+PI = 6
 #PI 2 PIN 17
 #PI1,3-5 PIN 4
 DHT_PIN = 4
