@@ -19,7 +19,7 @@ public class MonitorThread extends Thread {
                     if(DEBUG){
                         System.out.println(line); //<-- Parse data here.
                     }
-                    if(line.contains("main.py")){
+                    if(line.contains("python")){
                         found = true;
                     }
                 }

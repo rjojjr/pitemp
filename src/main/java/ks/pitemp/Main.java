@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 public class Main {
 
-    public static final int PI = 6;
+    public static final int PI = 3;
     public static final String IP = "192.168.1.25";
     public static final String HOSTNAME = " ";
     public static final int PORT = 7773;
