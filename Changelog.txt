@@ -1,8 +1,10 @@
 PiTemp Gateway Changelog
 
 2.0.03
+
 12/02/2019
 Build 110105
+    First release version.
     Added monitor thread.
     startPy.sh no longer need starting with version 2.0.03
 
