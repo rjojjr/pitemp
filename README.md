@@ -20,7 +20,7 @@ functionality.
 Requirements:
 JVM 8
 PiCenter Springboot web application
-Raspberry Pi with network access PiCenter server
+Raspberry Pi with network access to PiCenter server
 WiringPI python library(To use TM1637)
 Adafruit DHT python library
 py4j Python Java Gateway library
