@@ -12,14 +12,14 @@ public class MonitorThread extends Thread {
             boolean found = false;
             try {
                 String line;
-                Process p = Runtime.getRuntime().exec("ps -e");
+                Process p = Runtime.getRuntime().exec("ps -aux");
                 BufferedReader input =
                         new BufferedReader(new InputStreamReader(p.getInputStream()));
                 while ((line = input.readLine()) != null) {
                     if(DEBUG){
                         System.out.println(line); //<-- Parse data here.
                     }
-                    if(line.contains("python")){
+                    if(line.contains("main.py")){
                         found = true;
                     }
                 }
@@ -40,7 +40,7 @@ public class MonitorThread extends Thread {
                 }
             }
             try{
-                Thread.sleep(30000);
+                Thread.sleep(Main.MONITOR_SCAN_INTERVAL);
             }catch(Exception e){
                 if(DEBUG){
                     e.printStackTrace();
