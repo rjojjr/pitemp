@@ -3,7 +3,12 @@ package ks.pitemp;
 import py4j.GatewayServer;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Main {
 
@@ -21,9 +26,14 @@ public class Main {
     }
 
     public static void main(String[] args) throws  Exception{
-        Thread monitorThread = new MonitorThread();
-        monitorThread.start();
-        startServer();
+        try{
+            Thread.sleep(15000);
+            Thread monitorThread = new MonitorThread();
+            monitorThread.start();
+            startServer();
+        }catch (Exception e){
+            restartApplication();
+        }
     }
 
     private static void startServer() {
@@ -85,5 +95,24 @@ public class Main {
             }
         }
         return app;
+    }
+
+    private static void restartApplication() throws URISyntaxException, IOException {
+        //final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+        final File currentJar = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+
+        /* is it a jar file? */
+        if(!currentJar.getName().endsWith(".jar"))
+            return;
+
+        /* Build command: java -jar application.jar */
+        final ArrayList<String> command = new ArrayList<String>();
+        command.add("java");
+        command.add("-jar");
+        command.add(currentJar.getPath());
+
+        final ProcessBuilder builder = new ProcessBuilder(command);
+        builder.start();
+        System.exit(0);
     }
 }
