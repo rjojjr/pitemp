@@ -11,28 +11,46 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static final int PI = 6;
-    public static final String IP = "192.168.1.25";
-    public static final String HOSTNAME = " ";
-    public static final int PORT = 7773;
+    public static int PI = 1;
+    public static String IP = "192.168.1.25";
+    public static String HOSTNAME = " ";
+    public static int PORT = 7773;
     public static final int MONITOR_SCAN_INTERVAL = 60 * 1000;
-    public static final boolean DEBUG = false;
+    public static boolean DEBUG = false;
+
+    private static Logger logger = Logger.getLogger();
 
     private Update app;
-
-    Logger logger = Logger.getLogger();
 
     public Main() {
         app = new Update();
     }
 
     public static void main(String[] args) throws Exception {
+        if(args.length == 2){
+            IP = args[0];
+            PORT = Integer.parseInt(args[1]);
+        }
+        if(args.length == 3){
+            IP = args[0];
+            PORT = Integer.parseInt(args[1]);
+            PI = Integer.parseInt(args[2]);
+        }
+        if(args.length == 4){
+            IP = args[0];
+            PORT = Integer.parseInt(args[1]);
+            PI = Integer.parseInt(args[2]);
+            if(args[3].contains("t")){
+                DEBUG = true;
+            }
+        }
         try {
             Thread.sleep(15000);
             Thread monitorThread = new MonitorThread();
             monitorThread.start();
             startServer();
         } catch (Exception e) {
+            logger.log("Exception thrown in main", e);
             restartApplication();
         }
     }
@@ -64,7 +82,8 @@ public class Main {
             server.start();
             System.out.println("Gateway server started");
         } catch (Exception e) {
-
+            logger.log("Exception thrown in main", e);
+            restartApplication();
         }
 
     }
@@ -122,7 +141,7 @@ public class Main {
             builder.start();
             System.exit(0);
         } catch (Exception e) {
-
+            logger.log("Failed to reboot application", e);
         }
     }
 }
