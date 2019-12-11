@@ -28,7 +28,7 @@ class Logger {
         return single_instance;
     }
 
-    private void log(String msg, Exception e){
+    public void log(String msg, Exception e){
         if(!logFile.exists()){
             createLog(logFile);
         }

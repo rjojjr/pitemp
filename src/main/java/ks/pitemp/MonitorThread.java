@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 public class MonitorThread extends Thread {
 
     private static boolean DEBUG = Main.DEBUG;
+    private static Logger logger = Logger.getLogger();
 
     public void run(){
         while(true){
@@ -25,7 +26,9 @@ public class MonitorThread extends Thread {
                 }
                 input.close();
             } catch (Exception err) {
+                logger.log("Failed to read running processes", err);
                 err.printStackTrace();
+                Main.restartApplication();
             }
             if(!found){
                 if(DEBUG){
@@ -35,7 +38,9 @@ public class MonitorThread extends Thread {
                     Process p = Runtime.getRuntime().exec("python main.py");
                 }catch (Exception e){
                     if(DEBUG){
+                        logger.log("Failed to start main.py", e);
                         e.printStackTrace();
+                        Main.restartApplication();
                     }
                 }
             }
@@ -44,7 +49,7 @@ public class MonitorThread extends Thread {
             }catch(Exception e){
                 if(DEBUG){
                     e.printStackTrace();
-                    throw e;
+                    logger.log("Monitor thread sleep interrupted", e);
                 }
             }
         }
