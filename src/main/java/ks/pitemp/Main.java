@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 public class Main {
 
@@ -21,98 +20,109 @@ public class Main {
 
     private Update app;
 
-    public Main(){
+    Logger logger = Logger.getLogger();
+
+    public Main() {
         app = new Update();
     }
 
-    public static void main(String[] args) throws  Exception{
-        try{
+    public static void main(String[] args) throws Exception {
+        try {
             Thread.sleep(15000);
             Thread monitorThread = new MonitorThread();
             monitorThread.start();
             startServer();
-        }catch (Exception e){
+        } catch (Exception e) {
             restartApplication();
         }
     }
 
     private static void startServer() {
-        System.out.println("Starting gateway server...");
-        GatewayServer server = null;
-        switch (PI){
-            case 1:
-                server = new GatewayServer(new Main());
-                break;
-            case 2:
-                server = new GatewayServer(new Main(), 25331);
-                break;
-            case 3:
-                server = new GatewayServer(new Main(), 25332);
-                break;
-            case 4:
-                server = new GatewayServer(new Main(), 25333);
-                break;
-            case 5:
-                server = new GatewayServer(new Main(), 25331);
-                break;
-            case 6:
-                server = new GatewayServer(new Main(), 25334);
-                break;
+        try {
+            System.out.println("Starting gateway server...");
+            GatewayServer server = null;
+            switch (PI) {
+                case 1:
+                    server = new GatewayServer(new Main());
+                    break;
+                case 2:
+                    server = new GatewayServer(new Main(), 25331);
+                    break;
+                case 3:
+                    server = new GatewayServer(new Main(), 25332);
+                    break;
+                case 4:
+                    server = new GatewayServer(new Main(), 25333);
+                    break;
+                case 5:
+                    server = new GatewayServer(new Main(), 25331);
+                    break;
+                case 6:
+                    server = new GatewayServer(new Main(), 25334);
+                    break;
+            }
+            server.start();
+            System.out.println("Gateway server started");
+        } catch (Exception e) {
+
         }
-        server.start();
-        System.out.println("Gateway server started");
+
     }
 
-    public Update getApp() throws Exception{
+    public Update getApp() throws Exception {
         System.out.println("Python connected to server");
         System.out.println("Logging on...");
-        try{
-            if(app.logon()){
+        try {
+            if (app.logon()) {
                 System.out.println("Logged on");
-            }else{
-                while(app.logon() != true){
+            } else {
+                while (app.logon() != true) {
                     System.out.println("Failed to logon..." + System.lineSeparator() + "Retrying in 60 seconds...");
                     Thread.sleep(60 * 1000);
-                    if(app.logon()){
+                    if (app.logon()) {
                         System.out.println("Logged on");
-                    }else{
+                    } else {
                         System.out.println("Failed to connect");
                     }
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Failed to logon..." + System.lineSeparator() + "Retrying in 60 seconds...");
             Thread.sleep(60 * 1000);
-            try{
-                if(app.logon()){
+            try {
+                if (app.logon()) {
                     System.out.println("Logged on");
-                }else{
+                } else {
                     System.out.println("Failed to logon..." + System.lineSeparator() + "Retrying in 60 seconds...");
                     Thread.sleep(60 * 1000);
                 }
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 System.out.println("Failed to connect");
             }
         }
         return app;
     }
 
-    private static void restartApplication() throws URISyntaxException, IOException {
+    static void restartApplication() {
         //final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-        final File currentJar = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+        try {
+            final File currentJar = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
 
-        /* is it a jar file? */
-        if(!currentJar.getName().endsWith(".jar"))
-            return;
+            /* is it a jar file? */
+            if (!currentJar.getName().endsWith(".jar"))
+                return;
 
-        /* Build command: java -jar application.jar */
-        final ArrayList<String> command = new ArrayList<String>();
-        command.add("java");
-        command.add("-jar");
-        command.add(currentJar.getPath());
+            /* Build command: java -jar application.jar */
+            final ArrayList<String> command = new ArrayList<String>();
+            command.add("java");
+            command.add("-jar");
+            command.add(currentJar.getPath());
 
-        final ProcessBuilder builder = new ProcessBuilder(command);
-        builder.start();
-        System.exit(0);
+            final ProcessBuilder builder = new ProcessBuilder(command);
+            builder.start();
+            System.exit(0);
+        } catch (Exception e) {
+
+        }
     }
 }

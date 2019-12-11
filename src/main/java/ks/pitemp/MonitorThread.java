@@ -44,6 +44,7 @@ public class MonitorThread extends Thread {
             }catch(Exception e){
                 if(DEBUG){
                     e.printStackTrace();
+                    throw e;
                 }
             }
         }
